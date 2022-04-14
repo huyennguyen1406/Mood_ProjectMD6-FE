@@ -33,7 +33,7 @@
               <th scope="col" *ngIf="userId == playlist.user.id">Xóa</th>
             </tr>
             </thead>
-            <tbody *ngFor="let song of songList| paginate: { itemsPerPage: 7, currentPage: p }; let i = index">
+            <tbody *ngFor="let song of songList| paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
             <tr>
               <th> {{i + 1}}</th>
               <th scope="row">
@@ -45,13 +45,10 @@
                    [routerLink]="['/home/song',song.idSong]">{{song.nameSong}}</a>
               </td>
               <td>
-                <p *ngIf="song.singers.length == 0">{{song.user.username}}</p>
-                <div *ngFor="let singer of song.singers">
-                  <p><a [routerLink]="['/singer',singer.id]">{{singer.name}}</a></p>
-                </div>
+                <p>{{song.user.username}}</p>
               </td>
               <td *ngIf="userId == playlist.user.id">
-                <button class="btn btn-danger" (click)="onDeleteSongWithoutPlaylist(song.id)">Delete</button>
+                <button class="btn btn-danger" (click)="onDeleteSongWithoutPlaylist(song.idSong)">Delete</button>
               </td>
             </tr>
             </tbody>

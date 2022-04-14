@@ -35,8 +35,8 @@ export class PlaySongComponent implements OnInit {
               private playlistService: PlaylistService,
               private router: ActivatedRoute,
               private userService: UsersService,
-              private likesongService: LikesongService,
-              private commentsongService: CommentsongService,
+              private likeSongService: LikesongService,
+              private commentSongService: CommentsongService,
               private httpService: HttpService) {
   }
 
@@ -45,12 +45,12 @@ export class PlaySongComponent implements OnInit {
     this.id = Number(this.router.snapshot.paramMap.get('id'));
 
     // Lấy totalLike - DONE
-    this.likesongService.getTotalLike(this.id).subscribe(countLike => {
+    this.likeSongService.getTotalLike(this.id).subscribe(countLike => {
       this.totalLike = countLike;
     });
 
     // Lấy comment của bài hát - DONE
-    this.commentsongService.getCommentBySong(this.id).subscribe(comments => {
+    this.commentSongService.getCommentBySong(this.id).subscribe(comments => {
       this.commentSong = comments;
     });
 
@@ -82,11 +82,11 @@ export class PlaySongComponent implements OnInit {
   // Đổi bài hát : dùng trong đoạn "Có thể bạn muốn nghe" - DONE
   // tslint:disable-next-line:typedef
   changeSong(data) {
-    this.commentsongService.getCommentBySong(data).subscribe(res => {
+    this.commentSongService.getCommentBySong(data).subscribe(res => {
       this.commentSong = res;
     });
 
-    this.likesongService.getTotalLike(data).subscribe(countLike => {
+    this.likeSongService.getTotalLike(data).subscribe(countLike => {
       this.totalLike = countLike;
     });
 

@@ -22,8 +22,10 @@ export class PlaylistService {
     return this.http.get<Playlist[]>(API_URL + '/home/playlist/newest');
   }
 
-  getPlaylistById(id: number): Observable<Playlist> {
-    return this.http.get<Playlist>(API_URL + '/home/playlist/' + id);
+
+  // Lấy toàn bộ bài hát trong playlist theo Id
+  getPlaylistById(idPlaylist: number): Observable<Playlist> {
+    return this.http.get<Playlist>(API_URL + '/home/playlist/' + idPlaylist);
   }
 
   getPlaylistByName(search: string): Observable<Playlist[]> {

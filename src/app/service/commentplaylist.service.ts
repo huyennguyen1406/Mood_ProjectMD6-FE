@@ -15,11 +15,17 @@ export class CommentplaylistService {
   constructor(private http: HttpClient,
               private httpService: HttpService) { }
 
-  getCommentByPlaylist(songid: number): Observable<any>{
-    return this.http.get<any>(API_URL + '/home/commentplaylist/' + songid);
+  // Lấy toàn bộ comment của playlist theo Id
+  getCommentByPlaylist(idPlaylist: number): Observable<CommentPlaylist[]>{
+    return this.http.get<CommentPlaylist[]>(API_URL + '/home/comment/playlist/list/' + idPlaylist);
   }
 
-  updateCommentplaylist(commentplaylist: CommentPlaylist): Observable<any> {
-    return this.http.post(API_URL + '/commentplaylist', commentplaylist, this.httpService.getHttp());
+  // Lấy tổng like của playlist
+  getTotalLikePlaylist(idPlaylist: number): Observable<any> {
+    return this.http.get<any>(API_URL + `/home/like/playlist/${idPlaylist}`)
+  }
+
+  updateCommentplaylist(commentPlaylist: CommentPlaylist): Observable<any> {
+    return this.http.post(API_URL + '/comment/playlist', commentPlaylist, this.httpService.getHttp());
   }
 }

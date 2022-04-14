@@ -20,15 +20,23 @@ export class PlayPlaylistComponent implements OnInit {
   playlist: Playlist;
   p: number;
   page: number;
+  totalLike: any;
 
   constructor(private playlistService: PlaylistService,
-              private commentplaylistService: CommentplaylistService,
+              private commentPlaylistService: CommentplaylistService,
               private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = Number(this.router.snapshot.paramMap.get('id'));
-    this.commentplaylistService.getCommentByPlaylist(this.id).subscribe(res => {
-      this.commentPlaylist = res;
+    this.commentPlaylistService.getTotalLikePlaylist(this.id).subscribe(countLike => {
+      this.totalLike = countLike;
+    })
+    this.commentPlaylistService.getCommentByPlaylist(this.id).subscribe(comments => {
+      this.commentPlaylist = comments;
+      console.log(this.commentPlaylist)
+      console.log(comments)
+    }, error => {
+      console.log(error)
     });
     this.playlistService.getPlaylistById(this.id).subscribe(res => {
       this.songList = res.songs;
@@ -71,10 +79,10 @@ export class PlayPlaylistComponent implements OnInit {
         // tslint:disable-next-line:one-variable-per-declaration prefer-const
         let playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
-        let songs: Song[] = new Array(this.songlist.length);
+        let songs: Song[] = new Array(this.songList.length);
         // tslint:disable-next-line:no-shadowed-variable prefer-for-of
-        for (let i = 0; i < this.songlist.length; i++){
-          songs[i] = this.songlist[i];
+        for (let i = 0; i < this.songList.length; i++){
+          songs[i] = this.songList[i];
         }
 
         // tslint:disable-next-line:typedef
@@ -266,10 +274,10 @@ export class PlayPlaylistComponent implements OnInit {
             tProgress.text('00:00');
             tTime.text('00:00');
 
-            const currAlbum = songs[currIndex].name;
-            const currTrackName = songs[currIndex].singers[0].name;
+            const currAlbum = songs[currIndex].nameSong;
+            const currTrackName = songs[currIndex].user.name;
 
-            audio.src = songs[currIndex].fileUrl;
+            audio.src = songs[currIndex].mp3UrlSong;
 
             nTime = 0;
             bTime = new Date();
