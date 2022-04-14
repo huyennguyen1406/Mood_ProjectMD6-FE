@@ -5,7 +5,7 @@ import {HttpService} from '../../../service/http.service';
 import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../model/Playlist';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Users} from '../../../model/Users';
+import {User} from '../../../model/User';
 import {UsersService} from '../../../service/users.service';
 declare var Swal: any;
 
@@ -25,7 +25,7 @@ export class UserMysongComponent implements OnInit {
   songList: Song[] = [];
   playlists: Playlist[] = [];
   userid: number;
-  user: Users;
+  user: User;
   song: Song;
   playlistForm: FormGroup;
 

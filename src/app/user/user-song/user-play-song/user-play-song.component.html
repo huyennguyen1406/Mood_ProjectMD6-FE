@@ -84,7 +84,7 @@
       <tr>
         <td>
                <span>
-                  <div *ngFor="let like of likeSongs">
+                  <div *ngFor="let like of likesongs">
                       <div *ngIf="like.song.id == song.id && like.user.id == userId">
                       <a (click)="likesong(song, like)" style="text-decoration: none">
                       <i class="fa fa-heart text-danger"></i>

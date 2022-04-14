@@ -18,6 +18,7 @@ export class ListNewSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Sửa thành getSongByLike()
     this.songService.getAllSongsNew().subscribe(res => {
       this.songList = res;
       $(() => {

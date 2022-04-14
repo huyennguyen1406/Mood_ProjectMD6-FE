@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Song} from '../../../model/Song';
 import {SongService} from '../../../service/song.service';
-import {LikeSongService} from '../../../service/likeSong.service';
-// @ts-ignore
+import {LikesongService} from '../../../service/likesong.service';
 import {LikeSong} from '../../../model/LikeSong';
 import {HttpService} from '../../../service/http.service';
 import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../model/Playlist';
 import {UsersService} from '../../../service/users.service';
-import {Users} from '../../../model/Users';
+import {User} from '../../../model/User';
 declare var Swal: any;
 
 @Component({
@@ -19,17 +18,18 @@ declare var Swal: any;
 export class AllSongsComponent implements OnInit {
 
   songList: Song[];
-  likeSongs: LikeSong[] = [];
+  likesongs: LikeSong[] = [];
   playlists: Playlist[];
   userId: number;
   status: boolean;
   song: Song;
-  user: Users;
+  user: User;
   p: number;
+  url: string;
 
   constructor(private songService: SongService,
               private playlistService: PlaylistService,
-              private likeSongService: LikeSongService,
+              private likesongService: LikesongService,
               private userService: UsersService,
               private httpClient: HttpService) {
   }
@@ -37,13 +37,15 @@ export class AllSongsComponent implements OnInit {
   ngOnInit(): void {
     this.songService.getAllSongs().subscribe(res => {
       this.songList = res;
+
+      console.log(this.songList[0].avatarUrlSong);
       // tslint:disable-next-line:no-shadowed-variable
       this.playlistService.getPlaylistByUser(this.userId).subscribe(res => {
         this.playlists = res;
       });
       this.userId = Number(this.httpClient.getID());
-      this.likeSongService.getAllLikeSong().subscribe(response => {
-        this.likeSongs = response;
+      this.likesongService.getAllLikesong().subscribe(response => {
+        this.likesongs = response;
       });
       this.playlistService.getPlaylistByUser(this.userId).subscribe(playlist => {
         this.playlists = playlist;
@@ -52,7 +54,7 @@ export class AllSongsComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  likeSong(song, like) {
+  likesong(song, like) {
     if (like.status) {
       song.countLike--;
       like.status = false;
@@ -60,7 +62,7 @@ export class AllSongsComponent implements OnInit {
       song.countLike++;
       like.status = true;
     }
-    this.likeSongService.updateLikeSong(like).subscribe(() => {
+    this.likesongService.updateLikesong(like).subscribe(() => {
       this.songService.updateSong(song).subscribe(() => {
         this.songService.getAllSongs().subscribe(res => {
           this.songList = res;

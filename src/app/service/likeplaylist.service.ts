@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {HttpService} from './http.service';
-import {Likeplaylist} from '../model/Likeplaylist';
+import {LikePlaylist} from '../model/LikePlaylist';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -19,7 +19,7 @@ export class LikeplaylistService {
     return this.http.get<any>(API_URL + '/likeplaylist', this.httpService.getHttp());
   }
 
-  updateLikeplaylist(likeplaylist: Likeplaylist): Observable<any> {
+  updateLikeplaylist(likeplaylist: LikePlaylist): Observable<any> {
     return this.http.post(API_URL + '/likeplaylist', likeplaylist, this.httpService.getHttp());
   }
 }

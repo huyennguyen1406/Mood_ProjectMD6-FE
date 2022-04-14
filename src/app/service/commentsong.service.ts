@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {HttpService} from './http.service';
-import {Commentsong} from '../model/Commentsong';
+import {CommentSong} from '../model/CommentSong';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -15,11 +15,12 @@ export class CommentsongService {
   constructor(private http: HttpClient,
               private httpService: HttpService) { }
 
-  getCommentBySong(songid: number): Observable<any>{
-    return this.http.get<any>(API_URL + '/home/commentsong/' + songid);
+  // Lấy hết comment trong 1 Song
+  getCommentBySong(idSong: number): Observable<any>{
+    return this.http.get<any>(API_URL + '/home/comment/song/list/' + idSong);
   }
 
-  updateCommentsong(commentsong: Commentsong): Observable<any> {
-    return this.http.post(API_URL + '/commentsong', commentsong, this.httpService.getHttp());
+  updateCommentsong(commentSong: CommentSong): Observable<any> {
+    return this.http.post(API_URL + '/comment/song', commentSong, this.httpService.getHttp());
   }
 }

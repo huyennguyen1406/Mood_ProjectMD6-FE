@@ -12,7 +12,7 @@ import {PlaylistService} from '../../../service/playlist.service';
 })
 export class ListSongSearchComponent implements OnInit {
 
-  nameSearch: string;
+  search: string;
   songLists: Song[] = [];
   playLists: Playlist[] = [];
   p: number;
@@ -24,12 +24,15 @@ export class ListSongSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.nameSearch = params.name;
-      this.songService.getSongByName(this.nameSearch).subscribe(res => {
+      this.search = params.search;
+      console.log(this.search);
+      this.songService.getSongByName(this.search).subscribe(res => {
         this.songLists = res;
+        console.log(this.songLists);
       });
-      this.playlistService.getPlaylistByName(this.nameSearch).subscribe(res => {
+      this.playlistService.getPlaylistByName(this.search).subscribe(res => {
         this.playLists = res;
+        console.log(this.playLists);
       });
     });
   }

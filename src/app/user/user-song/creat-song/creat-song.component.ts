@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SongService} from '../../../service/song.service';
-import {Users} from '../../../model/Users';
+import {User} from '../../../model/User';
 import {UsersService} from '../../../service/users.service';
 import {HttpService} from '../../../service/http.service';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -17,7 +17,7 @@ export class CreatSongComponent implements OnInit {
 
   songForm: FormGroup;
   message: string;
-  user: Users;
+  user: User;
   userid: string;
   avaUrl: string;
   fileUrl: string;

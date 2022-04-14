@@ -13,12 +13,12 @@
           <table class="table">
             <tr>
               <th>
-                <h4 class="font-weight-bold">Playlist: {{playlist.name}}</h4>
+                <h4 class="font-weight-bold">Playlist: {{playlist.namePlaylist}}</h4>
               </th>
               <th>
-                <a *ngIf="!userId" [routerLink]="['/playlist/play', playlist.id]">
+                <a *ngIf="!userId" [routerLink]="['/playlist/play', playlist.idPlaylist]">
                   <i class="fas fa-play-circle"></i> Play all </a>
-                <a *ngIf="userId" [routerLink]="['/home/playlist/play', playlist.id]">
+                <a *ngIf="userId" [routerLink]="['/home/playlist/play', playlist.idPlaylist]">
                   <i class="fas fa-play-circle"></i> Play all </a>
               </th>
             </tr>
@@ -37,12 +37,12 @@
             <tr>
               <th> {{i + 1}}</th>
               <th scope="row">
-                <img width="40" height="40" src="{{song.avatarUrl}}" class="img thumbnail pull-left mr-2">
+                <img width="40" height="40" src="{{song.avatarUrlSong}}" class="img thumbnail pull-left mr-2">
               </th>
               <td>
-                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/song/', song.id]">{{song.name}}</a>
+                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/song/', song.idSong]">{{song.nameSong}}</a>
                 <a *ngIf="userId" class="name-of-song"
-                   [routerLink]="['/home/song',song.id]">{{song.name}}</a>
+                   [routerLink]="['/home/song',song.idSong]">{{song.nameSong}}</a>
               </td>
               <td>
                 <p *ngIf="song.singers.length == 0">{{song.user.username}}</p>

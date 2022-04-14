@@ -5,13 +5,13 @@
       <div id="white-player">
         <div class="white-player-top">
           <div class="center">
-            <span class="now-playing"><h4><b>{{song.name}}</b></h4></span>
+            <span class="now-playing"><h4><b>{{song.nameSong}}</b></h4></span>
           </div>
 
         </div>
         <div class="text-center"><b>Ca sĩ: </b>
-          <span class="song-artist" *ngFor="let singer of song.singers">{{singer.name}}</span>
-          <span class="song-artist" *ngIf="song.singers.length == 0">{{song.user.name}}</span>
+          <span class="song-artist">{{song.user.name}}</span>
+          <!--          <span class="song-artist" *ngIf="song.singers.length == 0">{{song.user.name}}</span>-->
         </div>
 
         <div id="white-player-center">
@@ -54,7 +54,7 @@
       <div class="new-most-song mt-5">
         <div class="row p-5">
           <div class="col">
-            <h4 class="font-weight-bold">Có thể bạn sẽ thích</h4>
+            <h4 class="font-weight-bold">Được nhiều người yêu thích</h4>
             <table class="table table-light">
               <thead class="thead-dark">
               <tr>
@@ -64,11 +64,11 @@
               </tr>
               </thead>
               <tbody *ngFor="let song of songList, let i = index">
-              <tr (click)="changeSong(song.id)" *ngIf="i<9" class="songs">
+              <tr (click)="changeSong(song.idSong)" *ngIf="i<5" class="songs">
                 <th scope="row">{{i + 1}}</th>
-                <td><img style="float: left" src="{{song.avatarUrl}}" width="40" height="40" alt=""
+                <td><img style="float: left" src="{{song.avatarUrlSong}}" width="40" height="40" alt=""
                          class="img thumbnail pull-left mr-2"></td>
-                <td>{{song.name}}</td>
+                <td>{{song.nameSong}}</td>
               </tr>
               </tbody>
             </table>
@@ -86,7 +86,7 @@
                 <span>
                       <a style="text-decoration: none" [routerLink]="['/login']">
                       <i class="fa fa-heart text-danger"></i>
-                     </a> {{song.countLike}}
+                     </a> {{totalLike}}
                  </span>
         </td>
       </tr>
@@ -98,15 +98,15 @@
         <h3 class="mb-3">Bình luận</h3>
         <div>
           <ul class="list-group br-1"
-              *ngFor="let comment of commentsong | paginate: { itemsPerPage: 4, currentPage: p };">
+              *ngFor="let comment of commentSong | paginate: { itemsPerPage: 4, currentPage: p };">
             <li class="list-group-item pb-1">
               <div class="name-of-song">
-                <img src="{{comment.user.avatarUrl}}" width="40" height="40" style="float: left"
+                <img src="{{comment.userCommentSong.avatarURL}}" width="40" height="40" style="float: left"
                      class="img thumbnail pull-left mr-2">
               </div>
               <span>
-                       <h6 class="mb-1 text-dark"><b>{{comment.user.name}}</b></h6>
-                         <p>{{comment.content}}</p>
+                       <h6 class="mb-1 text-dark"><b>{{comment.userCommentSong.name}}</b></h6>
+                         <p>{{comment.contentComment}}</p>
                     </span>
             </li>
           </ul>

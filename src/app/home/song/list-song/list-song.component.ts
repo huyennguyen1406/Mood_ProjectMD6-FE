@@ -16,12 +16,12 @@ export class ListSongComponent implements OnInit {
   song4: Song;
   song5: Song;
   song6: Song;
-  song7: Song;
   constructor(private songService: SongService) { }
 
   ngOnInit(): void {
-    this.songService.getSongByLike().subscribe(res => {
-      this.songList = res;
+    // sửa thành getAllSongsNew()
+    this.songService.getAllSongsLikeMost().subscribe(songs => {
+      this.songList = songs;
       for (const i = 0; i < this.songList.length; ) {
         this.song1 = this.songList[i];
         this.song2 = this.songList[i + 1];
@@ -29,7 +29,6 @@ export class ListSongComponent implements OnInit {
         this.song4 = this.songList[i + 3];
         this.song5 = this.songList[i + 4];
         this.song6 = this.songList[i + 5];
-        this.song7 = this.songList[i + 6];
         break;
       }
     });

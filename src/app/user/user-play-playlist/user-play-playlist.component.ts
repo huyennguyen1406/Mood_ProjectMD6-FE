@@ -4,13 +4,13 @@ import {PlaylistService} from '../../service/playlist.service';
 import {ActivatedRoute} from '@angular/router';
 import {Playlist} from '../../model/Playlist';
 import {LikeplaylistService} from '../../service/likeplaylist.service';
-import {Likeplaylist} from '../../model/Likeplaylist';
+import {LikePlaylist} from '../../model/LikePlaylist';
 import {UsersService} from '../../service/users.service';
 import {HttpService} from '../../service/http.service';
 import {CommentplaylistService} from '../../service/commentplaylist.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Users} from '../../model/Users';
-import {Commentplaylist} from '../../model/Commentplaylist';
+import {User} from '../../model/User';
+import {CommentPlaylist} from '../../model/CommentPlaylist';
 declare var $: any;
 @Component({
   selector: 'app-user-play-playlist',
@@ -25,10 +25,10 @@ export class UserPlayPlaylistComponent implements OnInit {
   playlist: Playlist;
   p: number;
   page: number;
-  commentplaylist: Commentplaylist[];
+  commentplaylist: CommentPlaylist[];
   form: FormGroup;
-  user: Users;
-  likeplaylist: Likeplaylist[];
+  user: User;
+  likeplaylist: LikePlaylist[];
   userId: number;
 
   constructor(private playlistService: PlaylistService,

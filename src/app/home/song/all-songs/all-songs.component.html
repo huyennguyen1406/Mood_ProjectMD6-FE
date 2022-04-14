@@ -26,40 +26,40 @@
             <tr>
               <th> {{i + 1}}</th>
               <th scope="row">
-                <img width="40" height="40" src="{{song.avatarUrl}}" class="img thumbnail pull-left mr-2">
+                <img width="40" height="40" src="{{song.avatarUrlSong}}" class="img thumbnail pull-left mr-2">
               </th>
               <td>
-                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/song',song.id]">{{song.name}}</a>
-                <a *ngIf="userId" class="name-of-song" [routerLink]="['/home/song',song.id]">{{song.name}}</a>
+                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/song',song.idSong]">{{song.nameSong}} Hello anh em</a>
+                <a *ngIf="userId" class="name-of-song" [routerLink]="['/home/song',song.idSong]">{{song.nameSong}} Cái này sai nè</a>
               </td>
               <td>
-                <p *ngIf="song.singers.length == 0">{{song.user.username}}</p>
-                <div *ngFor="let singer of song.singers">
-                  <p><a [routerLink]="['/singer',singer.id]">{{singer.name}}</a></p>
-                </div>
+                <p >{{song.user.name}}</p>
+<!--                <div *ngFor="let singer of song.singers">-->
+<!--                  <p><a [routerLink]="['/singer',singer.id]">{{singer.name}}</a></p>-->
+<!--                </div>-->
               </td>
               <td *ngIf="userId">
-                <select (change)="addSongInPlaylist(ref.value, song.id)" #ref>
+                <select (change)="addSongInPlaylist(ref.value, song.idSong)" #ref>
                   <option>Chưa chọn</option>
-                  <option *ngFor="let list of playlists" value="{{list.id}}">{{list.name}}</option>
+                  <option *ngFor="let list of playlists" value="{{list.idPlaylist}}">{{list.namePlaylist}}</option>
                 </select>
               </td>
-              <td>
-                <span *ngIf="!userId">
-                  <a [routerLink]="['/login']" style="text-decoration: none">
-                    <span class="mdi mdi-heart-half-full text-danger fa-lg"></span> &nbsp;{{song.countLike}}
-                  </a>
-                </span>
+<!--              <td>-->
+<!--                <span *ngIf="!userId">-->
+<!--                  <a [routerLink]="['/login']" style="text-decoration: none">-->
+<!--                    <span class="mdi mdi-heart-half-full text-danger fa-lg"></span> &nbsp;{{song.countLike}}-->
+<!--                  </a>-->
+<!--                </span>-->
 
-                <div *ngFor="let like of likesongs">
-                  <div *ngIf="like.song.id == song.id && like.user.id == userId">
-                    <a  (click)="likesong(song, like)" style="text-decoration: none">
-                      <i *ngIf="like.status==true" id="like" class="fa fa-heart text-danger"></i>
-                      <i *ngIf="like.status==false"  class="fas fa-heart-broken text-danger"></i> &nbsp;
-                    </a>{{song.countLike}}
-                  </div>
-                </div>
-              </td>
+<!--                <div *ngFor="let like of likesongs">-->
+<!--                  <div *ngIf="like.song.id == song.id && like.user.id == userId">-->
+<!--                    <a  (click)="likesong(song, like)" style="text-decoration: none">-->
+<!--                      <i *ngIf="like.status==true" id="like" class="fa fa-heart text-danger"></i>-->
+<!--                      <i *ngIf="like.status==false"  class="fas fa-heart-broken text-danger"></i> &nbsp;-->
+<!--                    </a>{{song.countLike}}-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </td>-->
             </tr>
             </tbody>
           </table>

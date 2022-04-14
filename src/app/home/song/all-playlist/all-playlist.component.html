@@ -23,12 +23,12 @@
             <tr>
               <td> {{i + 1}}</td>
               <td scope="row">
-                <img width="40" height="40" src="{{playlist.avatarUrl}}" class="img thumbnail pull-left mr-2">
+                <img width="40" height="40" src="{{playlist.avatarPlaylistUrl}}" class="img thumbnail pull-left mr-2">
               </td>
               <td>
-                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/playlist',playlist.id]">{{playlist.name}}</a>
+                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/playlist',playlist.idPlaylist]">{{playlist.namePlaylist}}</a>
                 <a *ngIf="userId" class="name-of-song"
-                   [routerLink]="['/home/playlist',playlist.id]">{{playlist.name}}</a>
+                   [routerLink]="['/home/playlist',playlist.idPlaylist]">{{playlist.namePlaylist}}</a>
               </td>
               <td><a >{{playlist.user.username}}</a></td>
             </tr>

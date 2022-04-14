@@ -3,7 +3,7 @@ import {Song} from '../../../model/Song';
 import {PlaylistService} from '../../../service/playlist.service';
 import {ActivatedRoute} from '@angular/router';
 import {Playlist} from '../../../model/Playlist';
-import {Commentplaylist} from '../../../model/Commentplaylist';
+import {CommentPlaylist} from '../../../model/CommentPlaylist';
 import {CommentplaylistService} from '../../../service/commentplaylist.service';
 declare var $: any;
 
@@ -15,8 +15,8 @@ declare var $: any;
 export class PlayPlaylistComponent implements OnInit {
 
   id: number;
-  songlist: Song[];
-  commentplaylist: Commentplaylist[];
+  songList: Song[];
+  commentPlaylist: CommentPlaylist[];
   playlist: Playlist;
   p: number;
   page: number;
@@ -28,10 +28,10 @@ export class PlayPlaylistComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number(this.router.snapshot.paramMap.get('id'));
     this.commentplaylistService.getCommentByPlaylist(this.id).subscribe(res => {
-      this.commentplaylist = res;
+      this.commentPlaylist = res;
     });
     this.playlistService.getPlaylistById(this.id).subscribe(res => {
-      this.songlist = res.songs;
+      this.songList = res.songs;
       this.playlist = res;
       // tslint:disable-next-line:only-arrow-functions
       $(() => {

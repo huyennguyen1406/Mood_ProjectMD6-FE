@@ -1,17 +1,23 @@
-import {Users} from './Users';
+import {User} from './User';
 import {Singers} from './Singers';
 import {Playlist} from './Playlist';
+import {Author} from "./Author";
+import {Category} from "./Category";
+import {Tag} from "./Tag";
 
 export interface Song {
-  id?: number;
-  name?: string;
-  description?: string;
-  tags?: string;
-  avatarUrl?: string;
-  fileUrl?: string;
-  dateCreated?: string;
-  countLike?: number;
-  user?: Users;
-  singers?: Singers[];
+  idSong?: number;
+  nameSong?: string;
+  descriptionSong?: string;
+  mp3UrlSong?: string;
+  avatarUrlSong?: string;
+  author?: Author;
+  user?: User;
+
+  category?:Category;
+  numberOfViewSong?: number;
+  dateCreateSong?: string;
   playlists?: Playlist[];
+  tags?: Tag[];
+
 }

@@ -7,10 +7,10 @@ import {HttpService} from '../../../service/http.service';
 import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../model/Playlist';
 import {LikeSong} from '../../../model/LikeSong';
-import {LikeSongService} from '../../../service/likeSong.service';
+import {LikesongService} from '../../../service/likesong.service';
 import {CommentsongService} from '../../../service/commentsong.service';
-import {Commentsong} from '../../../model/Commentsong';
-import {Users} from '../../../model/Users';
+import {CommentSong} from '../../../model/CommentSong';
+import {User} from '../../../model/User';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 declare var Amplitude: any;
@@ -23,19 +23,19 @@ declare var Swal: any;
 })
 export class UserPlaySongComponent implements OnInit {
   songList: Song[];
-  likeSongs: LikeSong[];
+  likesongs: LikeSong[];
   playlists: Playlist[];
-  commentsong: Commentsong[];
+  commentsong: CommentSong[];
   id: number;
   song: Song;
   userId: number;
-  user: Users;
+  user: User;
   form: FormGroup;
   p: number;
 
   constructor(private userService: UsersService,
               private songService: SongService,
-              private likeSongService: LikeSongService,
+              private likesongService: LikesongService,
               private commentsongService: CommentsongService,
               private playlistService: PlaylistService,
               private router: ActivatedRoute,
@@ -55,8 +55,8 @@ export class UserPlaySongComponent implements OnInit {
     this.commentsongService.getCommentBySong(this.id).subscribe(res => {
       this.commentsong = res;
     });
-    this.likeSongService.getAllLikeSong().subscribe(res => {
-      this.likeSongs = res;
+    this.likesongService.getAllLikesong().subscribe(res => {
+      this.likesongs = res;
     });
     this.songService.getSongByLike().subscribe(res => {
       this.songList = res;
@@ -86,7 +86,7 @@ export class UserPlaySongComponent implements OnInit {
       song.countLike++;
       like.status = true;
     }
-    this.likeSongService.updateLikeSong(like).subscribe(() => {
+    this.likesongService.updateLikesong(like).subscribe(() => {
       this.songService.updateSong(song).subscribe(() => {
         this.songService.getSongById(song.id).subscribe(res => {
           this.song = res;

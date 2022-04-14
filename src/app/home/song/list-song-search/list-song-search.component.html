@@ -19,11 +19,16 @@
             </tr>
             </thead>
             <tbody
-              *ngFor="let song of songLists | paginate: { id: 'song', itemsPerPage: 7, currentPage: p }; let i = index">
+              *ngFor="let song of songLists | paginate: { id: 'song', itemsPerPage: 5, currentPage: p }; let i = index">
             <tr *ngIf="i < 10">
               <th scope="row">{{i + 1}}</th>
-              <td><img width="40" height="40" src="{{song.avatarUrl}}" class="img thumbnail pull-left mr-2"></td>
-              <td><a [routerLink]="['/song',song.id]"><b>{{song.name}}</b></a></td>
+              <td><img width="40" height="40" src="{{song.avatarUrlSong}}" class="img thumbnail pull-left mr-2"></td>
+              <td><a [routerLink]="['/song',song.idSong]"><b>{{song.nameSong}}</b></a>
+                <br>
+                <span style="float: left">
+                  <p class="mb-0 singer">Singer: {{song.user.name}}</p>
+                </span>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -43,11 +48,18 @@
             </tr>
             </thead>
             <tbody
-              *ngFor="let playlist of playLists | paginate: { id: 'playlist', itemsPerPage: 7, currentPage: page }; let i = index">
+              *ngFor="let playlist of playLists | paginate: { id: 'playlist', itemsPerPage: 5, currentPage: page }; let i = index">
             <tr>
               <th scope="row">{{i + 1}}</th>
-              <td><img width="40" height="40" src="{{playlist.avatarUrl}}" class="img thumbnail pull-left mr-2"></td>
-              <td><a [routerLink]="['/playlist',playlist.id]"><b>{{playlist.name}}</b></a></td>
+              <td><img width="40" height="40" src="{{playlist.avatarPlaylistUrl}}" class="img thumbnail pull-left mr-2">
+              </td>
+              <td>
+                <a [routerLink]="['/playlist',playlist.idPlaylist]"><b>{{playlist.namePlaylist}}</b></a>
+                <br>
+                <span style="float: left">
+              <p class="mb-0 singer">Owner: {{playlist.user.name}}</p>
+              </span>
+              </td>
             </tr>
             </tbody>
           </table>
