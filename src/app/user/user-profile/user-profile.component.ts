@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   userForm: FormGroup;
   user: Users;
-  userid: string;
+  userId: string;
   avaUrl: string;
   selectImg: any = null;
   roles: Role[];
@@ -35,12 +35,12 @@ export class UserProfileComponent implements OnInit {
       {
         name: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        gender: [''],
-        hobbies: [''],
-        avatarUrl: ['', [Validators.required]]
+        avatarUrl: ['', [Validators.required]],
+        phone: ['', Validators.required],
+        address: ['', Validators.required]
       });
-    this.userid = this.httpService.getID();
-    this.userService.getUserById(this.userid).subscribe(res => {
+    this.userId = this.httpService.getID();
+    this.userService.getUserById(this.userId).subscribe(res => {
       this.user = res;
       this.avaUrl = res.avatarUrl;
       this.userForm.patchValue(this.user);
@@ -55,11 +55,10 @@ export class UserProfileComponent implements OnInit {
       email: this.userForm.value.email,
       username: this.user.username,
       password:  this.user.password,
-      gender: this.userForm.value.gender,
-      hobbies: this.userForm.value.hobbies,
       avatarUrl: this.avaUrl,
       role: this.user.role
     };
+    // @ts-ignore
     this.userService.updateUser(user1).subscribe(res => {
       Swal.fire({
         icon: 'success',
@@ -68,12 +67,14 @@ export class UserProfileComponent implements OnInit {
         timer: 3000
       });
     });
+    // @ts-ignore
+    this.route.navigate('/home');
   }
 
   // tslint:disable-next-line:typedef
   sendToFirebase(){
     if (this.selectImg !== null){
-      const filePath = `avataruser/${this.selectImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+      const filePath = `avatarUser/${this.selectImg.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
       const fileRef = this.storage.ref(filePath);
       this.storage.upload(filePath, this.selectImg).snapshotChanges().pipe(
         finalize(() => {

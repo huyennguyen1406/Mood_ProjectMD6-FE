@@ -1,7 +1,7 @@
 <div class="container">
   <app-navbar-user></app-navbar-user>
   <div style="margin-top: 60px">
-    <form (ngSubmit)="onSubmit()" [formGroup]="userForm" >
+    <form class="box" (ngSubmit)="onSubmit()" [formGroup]="userForm" #f="ngForm" >
       <div>
         <table class="box">
           <tr>
@@ -38,21 +38,17 @@
             </td>
           </tr>
           <tr>
-            <td style="padding-left: 60px;">Giới tính</td>
-            <td><input type="text" formControlName="gender"></td>
-          </tr>
-          <tr>
-            <td style="padding-left: 60px;">Sở thích</td>
-            <td><input type="text" formControlName="hobbies"></td>
-          </tr>
-          <tr>
             <td colspan="3">
               <button type="submit">Cập nhật</button>
               <button class="button-cancel" [routerLink]="['/home']">Thoát</button>
+              <div class="alert alert-danger" *ngIf="f.submitted ">
+                Cập nhật thất bại
+              </div>
             </td>
           </tr>
         </table>
       </div>
+
     </form>
   </div>
 </div>

@@ -26,10 +26,10 @@ export class UsersService {
   }
 
   getUserById(id: string): Observable<Users> {
-    return this.http.get<Users>(API_URL + '/user/' + id, this.httpService.getHttp());
+    return this.http.get<Users>(API_URL + '/home/user/' + id, this.httpService.getHttp());
   }
 
-  updateUser(user: Users): Observable<any> {
-    return this.http.post(API_URL + '/user/changeinfo', user , this.httpService.getHttp());
+  updateUser(idUser: number, user: Users): Observable<any> {
+    return this.http.post(API_URL + idUser, user , this.httpService.getHttp());
   }
 }

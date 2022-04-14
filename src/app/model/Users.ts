@@ -6,8 +6,6 @@ export interface Users {
   email?: string;
   username?: string;
   password?: string;
-  gender?: string;
-  hobbies?: string;
   avatarUrl?: string;
   role?: Role[];
 }

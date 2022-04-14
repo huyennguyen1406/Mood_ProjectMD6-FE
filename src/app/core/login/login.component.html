@@ -1,13 +1,11 @@
 <app-navbar-menu></app-navbar-menu>
 <form class="box" *ngIf="!isLoggedIn" name="form" (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
   <div class="form-group">
-    <label>Tài khoản</label>
-    <input type="text" class="form-control" name="username" [(ngModel)]="form.username"/>
+    <input type="text" class="form-control" name="username" [(ngModel)]="form.username" placeholder="Tài khoản"/>
   </div>
 
   <div class="form-group">
-    <label>Mật khẩu</label>
-    <input type="password" class="form-control" name="password" [(ngModel)]="form.password"/>
+    <input type="password" class="form-control" name="password" [(ngModel)]="form.password" placeholder="Mật khẩu"/>
   </div>
   <br>
 
