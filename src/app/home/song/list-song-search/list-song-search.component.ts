@@ -24,15 +24,12 @@ export class ListSongSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.search = params.search;
-      console.log(this.search);
+      this.search = params.name;
       this.songService.getSongByName(this.search).subscribe(res => {
         this.songLists = res;
-        console.log(this.songLists);
       });
       this.playlistService.getPlaylistByName(this.search).subscribe(res => {
         this.playLists = res;
-        console.log(this.playLists);
       });
     });
   }

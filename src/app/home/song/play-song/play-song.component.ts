@@ -54,7 +54,7 @@ export class PlaySongComponent implements OnInit {
       this.commentSong = comments;
     });
 
-    // Lấy các bài hát bạn được like nhiều nhất -
+    // Lấy các bài hát bạn được like nhiều nhất - DONE
     this.songService.getSongByLike().subscribe(res => {
       this.songList = res;
     });

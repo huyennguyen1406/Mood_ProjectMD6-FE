@@ -20,7 +20,7 @@ export class CommentsongService {
     return this.http.get<any>(API_URL + '/home/comment/song/list/' + idSong);
   }
 
-  updateCommentsong(commentSong: CommentSong): Observable<any> {
-    return this.http.post(API_URL + '/comment/song', commentSong, this.httpService.getHttp());
+  updateCommentSong(commentSong: CommentSong): Observable<any> {
+    return this.http.post(API_URL + '/home/comment/song', commentSong, this.httpService.getHttp());
   }
 }

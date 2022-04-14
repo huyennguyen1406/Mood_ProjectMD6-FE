@@ -29,8 +29,8 @@
                 <img width="40" height="40" src="{{song.avatarUrlSong}}" class="img thumbnail pull-left mr-2">
               </th>
               <td>
-                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/song',song.idSong]">{{song.nameSong}} Hello anh em</a>
-                <a *ngIf="userId" class="name-of-song" [routerLink]="['/home/song',song.idSong]">{{song.nameSong}} Cái này sai nè</a>
+                <a *ngIf="!userId" class="name-of-song" [routerLink]="['/song',song.idSong]">{{song.nameSong}}</a>
+                <a *ngIf="userId" class="name-of-song" [routerLink]="['/home/song',song.idSong]">{{song.nameSong}}</a>
               </td>
               <td>
                 <p >{{song.user.name}}</p>

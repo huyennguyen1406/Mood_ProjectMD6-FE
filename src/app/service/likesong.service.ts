@@ -15,7 +15,7 @@ export class LikesongService {
   constructor(private http: HttpClient,
               private httpService: HttpService) { }
 
-  getAllLikesong(): Observable<any> {
+  getAllLikeSong(): Observable<any> {
     return this.http.get<any>(API_URL + '/likesong', this.httpService.getHttp());
   }
 
@@ -23,7 +23,7 @@ export class LikesongService {
     return this.http.get<any>(API_URL + `/home/like/song/${idSong}`)
   }
 
-  updateLikesong(likesong: LikeSong): Observable<any> {
-    return this.http.post(API_URL + '/likesong', likesong, this.httpService.getHttp());
+  updateLikeSong(idUser: number, idSong: number): Observable<any> {
+    return this.http.get(API_URL + `/home/like/song/${idUser}/${idSong}`, this.httpService.getHttp());
   }
 }

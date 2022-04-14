@@ -23,54 +23,71 @@ declare var Swal: any;
 })
 export class UserPlaySongComponent implements OnInit {
   songList: Song[];
-  likesongs: LikeSong[];
+  likeSongs: LikeSong[];
   playlists: Playlist[];
-  commentsong: CommentSong[];
+  commentSong: CommentSong[];
   id: number;
   song: Song;
   userId: number;
   user: User;
   form: FormGroup;
   p: number;
+  totalLike: number;
 
   constructor(private userService: UsersService,
               private songService: SongService,
-              private likesongService: LikesongService,
-              private commentsongService: CommentsongService,
+              private likeSongService: LikesongService,
+              private commentSongService: CommentsongService,
               private playlistService: PlaylistService,
               private router: ActivatedRoute,
               private httpService: HttpService,
-              private formbuild: FormBuilder) {
+              private formBuild: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.form = this.formbuild.group({
+    this.form = this.formBuild.group({
       comment: ['']
     });
     this.userId = Number(this.httpService.getID());
     this.id = Number(this.router.snapshot.paramMap.get('id'));
+
+    // Lấy totalLike - DONE
+    this.likeSongService.getTotalLike(this.id).subscribe(countLike => {
+      this.totalLike = countLike;
+    });
+
     this.playlistService.getPlaylistByUser(this.userId).subscribe(res => {
       this.playlists = res;
     });
-    this.commentsongService.getCommentBySong(this.id).subscribe(res => {
-      this.commentsong = res;
+
+    // Lấy comment của bài hát - DONE
+    this.commentSongService.getCommentBySong(this.id).subscribe(comments => {
+      this.commentSong = comments;
     });
-    this.likesongService.getAllLikesong().subscribe(res => {
-      this.likesongs = res;
-    });
+
+
+    // this.likeSongService.getAllLikeSong().subscribe(res => {
+    //   this.likeSongs = res;
+    // });
+
+    // Lấy các bài hát bạn được like nhiều nhất - DONE
     this.songService.getSongByLike().subscribe(res => {
       this.songList = res;
     });
+
+    // Lấy thông tin user
     this.userService.getUserById(this.httpService.getID()).subscribe(res => {
       this.user = res;
     });
+
+    // Lấy bài hát, dùng để chạy bài hát - DONE
     this.songService.getSongById(this.id).subscribe(res => {
       this.song = res;
       Amplitude.init({
         songs: [
           {
-            url: this.song.fileUrl,
-            cover_art_url: this.song.avatarUrl
+            url: this.song.mp3UrlSong,
+            cover_art_url: this.song.avatarUrlSong
           },
         ],
       });
@@ -78,33 +95,22 @@ export class UserPlaySongComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  likesong(song, like) {
-    if (like.status) {
-      song.countLike--;
-      like.status = false;
-    } else {
-      song.countLike++;
-      like.status = true;
-    }
-    this.likesongService.updateLikesong(like).subscribe(() => {
-      this.songService.updateSong(song).subscribe(() => {
-        this.songService.getSongById(song.id).subscribe(res => {
-          this.song = res;
-        });
-      });
-    });
+  likeSong(idUser: number, idSong: number) {
+    this.likeSongService.updateLikeSong(idUser, idSong).subscribe((countLike) =>{
+      this.totalLike = countLike;
+    })
   }
 
   // tslint:disable-next-line:typedef
   onEnter() {
-    const cmt = {
-      content: this.form.value.comment,
-      user: this.user,
-      song: this.song
+    const comment = {
+      contentComment: this.form.value.comment,
+      userCommentSong: this.user,
+      songCommentSong: this.song
     };
-    this.commentsongService.updateCommentsong(cmt).subscribe(res => {
-      this.commentsongService.getCommentBySong(this.song.id).subscribe( data => {
-        this.commentsong = data;
+    this.commentSongService.updateCommentSong(comment).subscribe(res => {
+      this.commentSongService.getCommentBySong(this.song.idSong).subscribe( data => {
+        this.commentSong = data;
         this.form.reset();
       });
     });
@@ -127,19 +133,27 @@ export class UserPlaySongComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   changeSong(data) {
-    this.commentsongService.getCommentBySong(data).subscribe(res => {
-      this.commentsong = res;
+
+    this.likeSongService.getTotalLike(data).subscribe(countLike => {
+      this.totalLike = countLike;
     });
+
     this.songService.getSongById(data).subscribe(res => {
       this.song = res;
       Amplitude.init({
         songs: [
           {
-            url: this.song.fileUrl,
-            cover_art_url: this.song.avatarUrl
+            url: this.song.mp3UrlSong,
+            cover_art_url: this.song.avatarUrlSong
           }
         ],
       });
     });
+
+    this.commentSongService.getCommentBySong(data).subscribe(res => {
+      this.commentSong = res;
+    });
   }
+
+
 }

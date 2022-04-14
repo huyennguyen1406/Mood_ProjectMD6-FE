@@ -33,8 +33,8 @@ export class PlaylistService {
     return this.http.get<Playlist[]>(API_URL + '/home/playlist/search', {params});
   }
 
-  getPlaylistByUser(userid: number): Observable<Playlist[]> {
-    return this.http.get<Playlist[]>(API_URL + '/user/playlist/' + userid, this.httpService.getHttp());
+  getPlaylistByUser(idUser: number): Observable<Playlist[]> {
+    return this.http.get<Playlist[]>(API_URL + '/home/playlist/' + idUser, this.httpService.getHttp());
   }
 
   createPlaylist(playlist: Playlist): Observable<any> {

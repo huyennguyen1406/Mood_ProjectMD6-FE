@@ -54,57 +54,57 @@ const routes: Routes = [
   {
     path: 'home',
     component: UserHomeComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'home/song/:id',
     component: UserPlaySongComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'home/playlist/play/:id',
     component: UserPlayPlaylistComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'home/playlist/:id',
     component: UserPlaylistComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'creatSong',
     component: CreatSongComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'userProfile',
     component: UserProfileComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'changePassword',
     component: PasswordComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'mysong',
     component: UserMysongComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'mysong/:id/edit',
     component: UserEditMysongComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'songs',
     component: AllSongsComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'playlists',
     component: AllPlaylistComponent,
-    // canActivate: [AuthGuardGuard]
+    canActivate: [AuthGuardGuard]
   }
 ];
 

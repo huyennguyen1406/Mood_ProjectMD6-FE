@@ -45,7 +45,7 @@
                    [routerLink]="['/home/song',song.idSong]">{{song.nameSong}}</a>
               </td>
               <td>
-                <p>{{song.user.username}}</p>
+                <p>{{song.user.name}}</p>
               </td>
               <td *ngIf="userId == playlist.user.id">
                 <button class="btn btn-danger" (click)="onDeleteSongWithoutPlaylist(song.idSong)">Delete</button>
