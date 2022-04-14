@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
-  title = 'Mood_ProjectMD6-FE';
+  title = 'FourKingMusic-Frontend';
 }

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Mood_ProjectMD6-FE'`, () => {
+  it(`should have as title 'JWT_Spring_Angular_FE'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Mood_ProjectMD6-FE');
+    expect(app.title).toEqual('JWT_Spring_Angular_FE');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Mood_ProjectMD6-FE app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('JWT_Spring_Angular_FE app is running!');
   });
 });
