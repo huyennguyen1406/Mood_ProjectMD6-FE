@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   userForm: FormGroup;
   user: Users;
-  userId: string;
+  userId: string = this.httpService.getID();
   avaUrl: string;
   selectImg: any = null;
   roles: Role[];
@@ -34,10 +34,10 @@ export class UserProfileComponent implements OnInit {
     this.userForm = this.formBuilder.group(
       {
         name: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        avatarUrl: ['', [Validators.required]],
+        address: ['', Validators.required],
         phone: ['', Validators.required],
-        address: ['', Validators.required]
+        email: ['', [Validators.required, Validators.email]]
+
       });
     this.userId = this.httpService.getID();
     this.userService.getUserById(this.userId).subscribe(res => {
@@ -49,26 +49,24 @@ export class UserProfileComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    const user1 = {
-      id: this.user.id,
+    const newUser = {
       name: this.userForm.value.name,
-      email: this.userForm.value.email,
-      username: this.user.username,
-      password:  this.user.password,
-      avatarUrl: this.avaUrl,
-      role: this.user.role
+      address: this.userForm.value.address,
+      phone: this.userForm.value.phone,
+      email: this.userForm.value.email
     };
     // @ts-ignore
-    this.userService.updateUser(user1).subscribe(res => {
+    this.userService.updateUser(this.userId, newUser).subscribe(res => {
       Swal.fire({
         icon: 'success',
         title: res.message,
         showConfirmButton: true,
         timer: 3000
       });
+      console.log(this.userId);
     });
     // @ts-ignore
-    this.route.navigate('/home');
+    // this.route.navigate('/home');
   }
 
   // tslint:disable-next-line:typedef
