@@ -52,10 +52,10 @@ export class UserMysongComponent implements OnInit {
     });
   }
 
-  onDeleteSong(id): void {
+  onDeleteSong(idSong): void {
     if (confirm('Are you sure?')) {
       this.userid = Number(this.httpService.getID());
-      this.songService.deleteSong(id).subscribe(res => {
+      this.songService.deleteSong(idSong).subscribe(res => {
         this.songService.getSongByUser(this.userid).subscribe(data => {
           this.songList = data;
         });
@@ -72,7 +72,7 @@ export class UserMysongComponent implements OnInit {
   // tslint:disable-next-line:typedef
   createPlaylist() {
     const playlist = {
-      name: this.playlistForm.value.name,
+      namePlaylist: this.playlistForm.value.name,
       user: this.user,
     };
     this.playlistService.createPlaylist(playlist).subscribe(res => {
@@ -88,10 +88,10 @@ export class UserMysongComponent implements OnInit {
     });
   }
 
-  onDeletePlaylist(id): void {
+  onDeletePlaylist(idPlaylist): void {
     if (confirm('Are you sure?')) {
       this.userid = Number(this.httpService.getID());
-      this.playlistService.deletePlaylist(id).subscribe(res => {
+      this.playlistService.deletePlaylist(idPlaylist).subscribe(res => {
         this.playlistService.getPlaylistByUser(this.userid).subscribe(data => {
           this.playlists = data;
         });

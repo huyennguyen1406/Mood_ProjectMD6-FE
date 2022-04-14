@@ -11,9 +11,9 @@
           </tr>
           <tr>
             <td style="padding-left: 60px;">Tên</td>
-            <td><input type="text" formControlName="name"></td>
+            <td><input type="text" formControlName="nameSong"></td>
             <td>
-              <div *ngIf="songForm.get('name').hasError('required') && songForm.get('name').touched"
+              <div *ngIf="songForm.get('nameSong').hasError('required') && songForm.get('nameSong').touched"
                    class="text-danger">
                 Không được để trống ô này!
               </div>
@@ -21,7 +21,7 @@
           </tr>
           <tr>
             <td style="padding-left: 60px;">Mô tả</td>
-            <td><input type="text" formControlName="description">
+            <td><input type="text" formControlName="descriptionSong">
             </td>
           </tr>
           <tr>
@@ -30,13 +30,13 @@
             </td>
           </tr>
           <tr>
-            <td style="padding-top: 30px; padding-left: 60px"><img [src]="avaUrl" alt="Lỗi hiển thị" width="50px"
+            <td style="padding-top: 30px; padding-left: 60px"><img [src]="avatarUrlSong" alt="Lỗi hiển thị" width="50px"
                                                                    height="50px"></td>
-            <td colspan="2"><input type="file" formControlName="avatarUrl" (change)="showPre($event)"></td>
+            <td colspan="2"><input type="file" formControlName="avatarUrlSong" (change)="showPre($event)"></td>
           </tr>
           <tr>
             <td style="padding-left: 60px; padding-top: 40px">File MP3</td>
-            <td style=" padding-top: 40px" colspan="2"><input type="file" formControlName="fileUrl"
+            <td style=" padding-top: 40px" colspan="2"><input type="file" formControlName="mp3UrlSong"
                                                               (change)="showPreFile($event)"></td>
           </tr>
           <tr>

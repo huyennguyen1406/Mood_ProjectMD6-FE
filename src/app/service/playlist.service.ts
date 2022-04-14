@@ -52,8 +52,9 @@ export class PlaylistService {
     return this.http.get(API_URL + `/home/song/${idSong}/${idPlaylist}`, this.httpService.getHttp());
   }
 
-  deletePlaylist(id: number): Observable<any> {
-    return this.http.delete(API_URL + '/playlist/' + id, this.httpService.getHttp());
+  // xóa playlist
+  deletePlaylist(idPlaylist: number): Observable<any> {
+    return this.http.delete(API_URL + '/home/playlist/' + idPlaylist, this.httpService.getHttp());
   }
 
   // Xóa bài hát khỏi playlist

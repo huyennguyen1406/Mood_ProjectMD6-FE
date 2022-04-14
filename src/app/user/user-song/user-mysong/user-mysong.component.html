@@ -22,13 +22,13 @@
               <th scope="col">Xóa</th>
             </tr>
             </thead>
-            <tbody *ngFor="let song of songList | paginate: { id: 'song', itemsPerPage: 7, currentPage: p }; let i = index">
+            <tbody *ngFor="let song of songList | paginate: { id: 'song', itemsPerPage: 5, currentPage: p }; let i = index">
             <tr >
               <th scope="row">{{i + 1}}</th>
-              <td><img width="40" height="40" src="{{song.avatarUrl}}" class="img thumbnail pull-left mr-2"></td>
-              <td><a [routerLink]="['/home/song/', song.id]"><b>{{song.name}}</b></a></td>
-              <td><a [routerLink]="[song.id, 'edit']"><i class="fas fa-edit fa-lg"></i>&nbsp;|&nbsp;</a></td>
-              <td><b (click)="onDeleteSong(song.id)"><i class="fas fa-trash-alt fa-lg"></i></b></td>
+              <td><img width="40" height="40" src="{{song.avatarUrlSong}}" class="img thumbnail pull-left mr-2"></td>
+              <td><a [routerLink]="['/home/song/', song.idSong]"><b>{{song.nameSong}}</b></a></td>
+              <td><a [routerLink]="[song.idSong, 'edit']"><i class="fas fa-edit fa-lg"></i>&nbsp;|&nbsp;</a></td>
+              <td><b (click)="onDeleteSong(song.idSong)"><i class="fas fa-trash-alt fa-lg"></i></b></td>
             </tr>
             </tbody>
           </table>
@@ -58,12 +58,12 @@
               <th scope="col">Xóa</th>
             </tr>
             </thead>
-            <tbody *ngFor="let playlist of playlists  | paginate: { id: 'playlist', itemsPerPage: 7, currentPage: page }; let i = index">
+            <tbody *ngFor="let playlist of playlists  | paginate: { id: 'playlist', itemsPerPage: 5, currentPage: page }; let i = index">
             <tr>
               <th scope="row">{{i + 1}}</th>
-              <td><img width="40" height="40" src="{{playlist.avatarUrl}}" class="img thumbnail pull-left mr-2"></td>
-              <td><a [routerLink]="['/home/playlist',playlist.id]"><b>{{playlist.name}}</b></a></td>
-              <td><b (click)="onDeletePlaylist(playlist.id)"><i class="fas fa-trash-alt fa-lg"></i></b></td>
+              <td><img width="40" height="40" src="{{playlist.avatarPlaylistUrl}}" class="img thumbnail pull-left mr-2"></td>
+              <td><a [routerLink]="['/home/playlist',playlist.idPlaylist]"><b>{{playlist.namePlaylist}}</b></a></td>
+              <td><b (click)="onDeletePlaylist(playlist.idPlaylist)"><i class="fas fa-trash-alt fa-lg"></i></b></td>
             </tr>
             </tbody>
           </table>
