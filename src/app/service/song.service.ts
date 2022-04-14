@@ -51,8 +51,9 @@ export class SongService {
     return this.http.get<Song[]>(API_URL + '/home/song/like-most');
   }
 
+  // tạo bài hát mới
   createSong(song: Song): Observable<any> {
-    return this.http.post(API_URL + '/song', song, this.httpService.getHttp());
+    return this.http.post(API_URL + '/home/song', song, this.httpService.getHttp());
   }
 
   // chỉnh sửa song
