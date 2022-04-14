@@ -15,7 +15,7 @@ export class LikesongService {
               private httpService: HttpService) { }
 
   getAllLikeSong(): Observable<any> {
-    return this.http.get<any>(API_URL + '/likesong', this.httpService.getHttp());
+    return this.http.get<any>(API_URL + '/like/song', this.httpService.getHttp());
   }
 
   getTotalLike(idSong: number): Observable<any> {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs';
@@ -13,7 +13,9 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class PlaylistService {
   constructor(private http: HttpClient,
-              private httpService: HttpService) { }
+              private httpService: HttpService) {
+  }
+
   getAllPlaylists(): Observable<Playlist[]> {
     return this.http.get<Playlist[]>(API_URL + '/home/playlist');
   }
@@ -34,7 +36,7 @@ export class PlaylistService {
   }
 
   getPlaylistByUser(idUser: number): Observable<Playlist[]> {
-    return this.http.get<Playlist[]>(API_URL + '/home/playlist/' + idUser, this.httpService.getHttp());
+    return this.http.get<Playlist[]>(API_URL + '/home/playlist/list/' + idUser, this.httpService.getHttp());
   }
 
   createPlaylist(playlist: Playlist): Observable<any> {
@@ -42,11 +44,12 @@ export class PlaylistService {
   }
 
   updatePlaylist(playlist: Playlist): Observable<any> {
-    return this.http.put(API_URL + '/playlist/update' , playlist  , this.httpService.getHttp());
+    return this.http.put(API_URL + '/playlist/update', playlist, this.httpService.getHttp());
   }
 
-  updateSongOfPlaylist(id: number, songId: number): Observable<any> {
-    return this.http.put(API_URL + '/playlist/' + id, songId, this.httpService.getHttp());
+  updateSongOfPlaylist(idPlaylist: number, idSong: number): Observable<any> {
+    // @ts-ignore
+    return this.http.get(API_URL + `/home/song/${idSong}/${idPlaylist}`, this.httpService.getHttp());
   }
 
   deletePlaylist(id: number): Observable<any> {

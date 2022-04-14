@@ -8,6 +8,8 @@ import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../model/Playlist';
 import {UsersService} from '../../../service/users.service';
 import {User} from '../../../model/User';
+import {isFromDtsFile} from "@angular/compiler-cli/src/ngtsc/util/src/typescript";
+
 declare var Swal: any;
 
 @Component({
@@ -26,10 +28,11 @@ export class AllSongsComponent implements OnInit {
   user: User;
   p: number;
   url: string;
+  likeTotal: number[] = [];
 
   constructor(private songService: SongService,
               private playlistService: PlaylistService,
-              private likesongService: LikesongService,
+              private likeSongService: LikesongService,
               private userService: UsersService,
               private httpClient: HttpService) {
   }
@@ -38,15 +41,24 @@ export class AllSongsComponent implements OnInit {
     this.songService.getAllSongs().subscribe(res => {
       this.songList = res;
 
-      console.log(this.songList[0].avatarUrlSong);
       // tslint:disable-next-line:no-shadowed-variable
       this.playlistService.getPlaylistByUser(this.userId).subscribe(res => {
         this.playlists = res;
       });
+
       this.userId = Number(this.httpClient.getID());
-      this.likesongService.getAllLikesong().subscribe(response => {
-        this.likesongs = response;
-      });
+
+      for (let i = 0; i < this.songList.length; i++) {
+        this.likeSongService.getTotalLike(this.songList[i].idSong).subscribe(totalLike => {
+          if (totalLike == null) {
+            this.likeTotal.push(0);
+          } else {
+            this.likeTotal.push(totalLike);
+          }
+        })
+      }
+      console.log(this.likeTotal);
+
       this.playlistService.getPlaylistByUser(this.userId).subscribe(playlist => {
         this.playlists = playlist;
       });
@@ -54,28 +66,26 @@ export class AllSongsComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  likesong(song, like) {
-    if (like.status) {
-      song.countLike--;
-      like.status = false;
-    } else {
-      song.countLike++;
-      like.status = true;
-    }
-    this.likesongService.updateLikesong(like).subscribe(() => {
-      this.songService.updateSong(song).subscribe(() => {
-        this.songService.getAllSongs().subscribe(res => {
-          this.songList = res;
-        });
-      });
-    });
+  likeSong(idUser: number, idSong: number) {
+    console.log(idUser)
+    console.log(idSong)
+    this.likeSongService.updateLikeSong(idUser, idSong).subscribe((countLike) => {
+      for (let i = 0; i < this.songList.length; i++) {
+        if (this.songList[i].idSong == idSong) {
+          this.likeTotal[i] = countLike;
+        }
+      }
+    })
   }
 
   // tslint:disable-next-line:typedef
-  addSongInPlaylist(listID, songId) {
-    this.playlistService.updateSongOfPlaylist(listID, songId).subscribe(res => {
+  addSongInPlaylist(idPlaylist, idSong) {
+    console.log(idPlaylist)
+    console.log(idSong)
+    this.playlistService.updateSongOfPlaylist(idPlaylist, idSong).subscribe(res => {
       this.playlistService.getPlaylistByUser(this.userId).subscribe(data => {
         this.playlists = data;
+        console.log(data)
       });
       Swal.fire({
         icon: 'success',

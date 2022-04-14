@@ -34,32 +34,28 @@
               </td>
               <td>
                 <p >{{song.user.name}}</p>
-<!--                <div *ngFor="let singer of song.singers">-->
-<!--                  <p><a [routerLink]="['/singer',singer.id]">{{singer.name}}</a></p>-->
-<!--                </div>-->
               </td>
               <td *ngIf="userId">
                 <select (change)="addSongInPlaylist(ref.value, song.idSong)" #ref>
                   <option>Chưa chọn</option>
-                  <option *ngFor="let list of playlists" value="{{list.idPlaylist}}">{{list.namePlaylist}}</option>
+                  <option *ngFor="let list of playlists" value="{{list.idPlaylist}}"
+                  >{{list.namePlaylist}}</option>
                 </select>
               </td>
-<!--              <td>-->
-<!--                <span *ngIf="!userId">-->
-<!--                  <a [routerLink]="['/login']" style="text-decoration: none">-->
-<!--                    <span class="mdi mdi-heart-half-full text-danger fa-lg"></span> &nbsp;{{song.countLike}}-->
-<!--                  </a>-->
-<!--                </span>-->
+              <td>
+                <span *ngIf="!userId">
+                  <a [routerLink]="['/login']" style="text-decoration: none">
+                    <span class="mdi mdi-heart-half-full text-danger fa-lg"></span>&nbsp;
+                    {{likeTotal[i]}}
+                  </a>
+                </span>
 
-<!--                <div *ngFor="let like of likesongs">-->
-<!--                  <div *ngIf="like.song.id == song.id && like.user.id == userId">-->
-<!--                    <a  (click)="likesong(song, like)" style="text-decoration: none">-->
-<!--                      <i *ngIf="like.status==true" id="like" class="fa fa-heart text-danger"></i>-->
-<!--                      <i *ngIf="like.status==false"  class="fas fa-heart-broken text-danger"></i> &nbsp;-->
-<!--                    </a>{{song.countLike}}-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </td>-->
+                <div *ngIf="userId">
+                    <a (click)="likeSong(userId, song.idSong)" style="text-decoration: none">
+                      <i  id="like" class="fa fa-heart text-danger"></i>&nbsp;
+                    </a>{{likeTotal[i]}}
+                </div>
+              </td>
             </tr>
             </tbody>
           </table>
