@@ -13,14 +13,15 @@
           <th scope="col">Bài hát</th>
         </tr>
         </thead>
-        <tbody *ngFor="let song of songList | paginate: {id: 'song', itemsPerPage: 5, currentPage: page }; let i = index">
+        <tbody
+          *ngFor="let song of songList | paginate: {id: 'song', itemsPerPage: 5, currentPage: page }; let i = index">
         <tr>
-          <td>{{i+1}}</td>
+          <td>{{i + 1}}</td>
           <td>
             <img style="float: left" src="{{song.avatarUrlSong}}" width="40" height="40" alt=""
                  class="img thumbnail pull-left mr-2">
           </td>
-          <td><a  [routerLink]="['/song',song.idSong]">{{song.nameSong}}</a></td>
+          <td><a [routerLink]="['/song',song.idSong]">{{song.nameSong}}</a></td>
         </tr>
         </tbody>
       </table>
@@ -34,11 +35,11 @@
         <table class="table">
           <tr>
             <td>
-                     <span>
-                      <a style="text-decoration: none" [routerLink]="['/login']">
-                      <i class="fa fa-heart text-danger"></i>
-                     </a> {{totalLike}}
-                 </span>
+              <span>
+                <a style="text-decoration: none" [routerLink]="['/login']">
+                  <i class="fa fa-heart text-danger"></i>
+                </a> {{totalLike}}
+              </span>
             </td>
           </tr>
         </table>
@@ -94,11 +95,11 @@
                  id="_1">
           </div>
           <div id="player-controls">
-<!--            <div class="control">-->
-<!--              <div class="button" id="play-previous">-->
-<!--                <i class="fas fa-backward"></i>-->
-<!--              </div>-->
-<!--            </div>-->
+            <!--            <div class="control">-->
+            <!--              <div class="button" id="play-previous">-->
+            <!--                <i class="fas fa-backward"></i>-->
+            <!--              </div>-->
+            <!--            </div>-->
             <div class="control">
               <div class="button" id="play-random-button">
                 <i class="fas fa-random"></i>

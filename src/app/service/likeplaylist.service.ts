@@ -15,11 +15,14 @@ export class LikeplaylistService {
   constructor(private http: HttpClient,
               private httpService: HttpService) { }
 
-  getAllLikeplaylist(): Observable<any> {
-    return this.http.get<any>(API_URL + '/likeplaylist', this.httpService.getHttp());
+
+  getTotalLike(idPlaylist: number): Observable<any> {
+    return this.http.get<any> (API_URL + `/home/like/playlist/${idPlaylist}`, this.httpService.getHttp())
   }
 
-  updateLikeplaylist(likeplaylist: LikePlaylist): Observable<any> {
-    return this.http.post(API_URL + '/likeplaylist', likeplaylist, this.httpService.getHttp());
+  updateLikePlaylist(idUser: number, idPlaylist: number): Observable<any> {
+    return this.http.get(API_URL + `/home/like/playlist/${idUser}/${idPlaylist}`, this.httpService.getHttp());
   }
+
+
 }

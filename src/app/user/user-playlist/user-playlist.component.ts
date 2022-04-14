@@ -19,15 +19,15 @@ export class UserPlaylistComponent implements OnInit {
               private httpClient: HttpService) { }
 
   songList: Song[];
-  id: number;
+  idPlaylist: number;
   userId: number;
   p: number;
   playlist: Playlist;
 
   ngOnInit(): void {
     this.userId = Number(this.httpClient.getID());
-    this.id = Number(this.router.snapshot.paramMap.get('id'));
-    this.playlistService.getPlaylistById(this.id).subscribe(res => {
+    this.idPlaylist = Number(this.router.snapshot.paramMap.get('id'));
+    this.playlistService.getPlaylistById(this.idPlaylist).subscribe(res => {
       this.playlist = res;
       this.songList = res.songs;
       console.log(res.songs[1].user.name)
@@ -35,9 +35,9 @@ export class UserPlaylistComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onDeleteSongWithoutPlaylist(id){
-    this.playlistService.deleteSongOfPlaylist(this.id, id).subscribe(res => {
-      this.playlistService.getPlaylistById(this.id).subscribe(data => {
+  onDeleteSongWithoutPlaylist(idSong){
+    this.playlistService.deleteSongOfPlaylist(this.idPlaylist, idSong).subscribe(res => {
+      this.playlistService.getPlaylistById(this.idPlaylist).subscribe(data => {
         this.songList = data.songs;
       });
       Swal.fire({

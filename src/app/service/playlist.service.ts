@@ -56,7 +56,8 @@ export class PlaylistService {
     return this.http.delete(API_URL + '/playlist/' + id, this.httpService.getHttp());
   }
 
-  deleteSongOfPlaylist(id: number, songId: number): Observable<any> {
-    return this.http.delete(API_URL + '/playlist/song/' + id + '/' + songId, this.httpService.getHttp());
+  // Xóa bài hát khỏi playlist
+  deleteSongOfPlaylist(idPlaylist: number, idSong: number): Observable<any> {
+    return this.http.delete(API_URL + `/home/song/${idSong}/${idPlaylist}`, this.httpService.getHttp());
   }
 }

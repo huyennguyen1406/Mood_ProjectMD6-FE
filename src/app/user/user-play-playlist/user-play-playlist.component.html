@@ -13,14 +13,14 @@
           <th scope="col">Bài hát</th>
         </tr>
         </thead>
-        <tbody *ngFor="let song of songlist | paginate: {id: 'song', itemsPerPage: 7, currentPage: p }; let i = index">
+        <tbody *ngFor="let song of songlist | paginate: {id: 'song', itemsPerPage: 5, currentPage: p }; let i = index">
         <tr>
           <td>{{i + 1}}</td>
           <td>
-            <img style="float: left" src="{{song.avatarUrl}}" width="40" height="40" alt=""
+            <img style="float: left" src="{{song.avatarUrlSong}}" width="40" height="40" alt=""
                  class="img thumbnail pull-left mr-2">
           </td>
-          <td><a [routerLink]="['/home/song',song.id]">{{song.name}}</a></td>
+          <td><a [routerLink]="['/home/song',song.idSong]">{{song.nameSong}}</a></td>
         </tr>
         </tbody>
       </table>
@@ -35,11 +35,11 @@
           <tr>
             <td>
               <span>
-              <div *ngFor="let like of likeplaylist">
-                <div *ngIf="like.playlist.id == playlist.id && like.user.id == userId">
-                  <a (click)="likePlaylist(playlist, like)" style="text-decoration: none">
+              <div>
+                <div>
+                  <a (click)="likePlaylist(userId, idPlaylist)" style="text-decoration: none">
                     <i class="fa fa-heart text-danger"></i>
-                  </a> {{playlist.countLike}}
+                  </a> {{totalLike}}
                 </div>
               </div>
                 </span>
@@ -53,15 +53,15 @@
             <h3 class="mb-3">Bình luận</h3>
             <div>
               <ul class="list-group br-1"
-                  *ngFor="let comment of commentplaylist | paginate: { id:'comment', itemsPerPage: 4, currentPage: page };">
+                  *ngFor="let comment of commentplaylist | paginate: { id:'comment', itemsPerPage: 2, currentPage: page };">
                 <li class="list-group-item pb-1">
                   <div class="name-of-song">
-                    <img src="{{comment.user.avatarUrl}}" width="40" height="40" style="float: left"
+                    <img src="{{comment.userCommentPlaylist.avatarURL}}" width="40" height="40" style="float: left"
                          class="img thumbnail pull-left mr-2">
                   </div>
                   <span>
-                       <h6 class="mb-1 text-dark"><b>{{comment.user.name}}</b></h6>
-                         <p>{{comment.content}}</p>
+                       <h6 class="mb-1 text-dark"><b>{{comment.userCommentPlaylist.name}}</b></h6>
+                         <p>{{comment.contentComment}}</p>
                     </span>
                 </li>
               </ul>
@@ -97,7 +97,7 @@
       </div>
       <div id="player-content">
         <div id="album-art">
-          <img src="{{playlist.avatarUrl}}"
+          <img src="{{playlist.avatarPlaylistUrl}}"
                class="active"
                id="_1">
         </div>

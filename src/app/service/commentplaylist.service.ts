@@ -24,8 +24,8 @@ export class CommentplaylistService {
   getTotalLikePlaylist(idPlaylist: number): Observable<any> {
     return this.http.get<any>(API_URL + `/home/like/playlist/${idPlaylist}`)
   }
-
-  updateCommentplaylist(commentPlaylist: CommentPlaylist): Observable<any> {
-    return this.http.post(API_URL + '/comment/playlist', commentPlaylist, this.httpService.getHttp());
+  // Thêm comment vào playlist
+  updateCommentPlaylist(commentPlaylist: CommentPlaylist): Observable<any> {
+    return this.http.post(API_URL + '/home/comment/playlist', commentPlaylist, this.httpService.getHttp());
   }
 }
