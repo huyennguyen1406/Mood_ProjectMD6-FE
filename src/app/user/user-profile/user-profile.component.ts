@@ -57,16 +57,16 @@ export class UserProfileComponent implements OnInit {
     };
     // @ts-ignore
     this.userService.updateUser(this.userId, newUser).subscribe(res => {
-      Swal.fire({
-        icon: 'success',
-        title: res.message,
-        showConfirmButton: true,
-        timer: 3000
-      });
-      console.log(this.userId);
+      // Swal.fire({
+      //   icon: 'success',
+      //   title: res.message,
+      //   showConfirmButton: true,
+      //   timer: 3000
+      // });
+      console.log(res);
     });
     // @ts-ignore
-    // this.route.navigate('/home');
+    this.route.navigate('/home');
   }
 
   // tslint:disable-next-line:typedef
@@ -78,6 +78,7 @@ export class UserProfileComponent implements OnInit {
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
             this.avaUrl = url;
+            console.log(url);
           });
         })
       ).subscribe();
