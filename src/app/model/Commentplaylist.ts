@@ -7,5 +7,6 @@ export interface CommentPlaylist {
   contentComment?: string;
   userCommentPlaylist?: User;
   playlistCommentPlaylist?: Playlist;
+  dateCreate?: string;
 
 }
