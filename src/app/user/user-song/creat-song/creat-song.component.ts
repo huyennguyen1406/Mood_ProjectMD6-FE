@@ -51,7 +51,7 @@ export class CreatSongComponent implements OnInit {
     this.userid = this.httpService.getID();
     this.userService.getUserById(this.userid).subscribe(res => {
       this.user = res;
-      this.avatarUrlSong = res.avatarUrl;
+      this.avatarUrlSong = res.avatarURL;
     });
   }
 
