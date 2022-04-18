@@ -79,7 +79,7 @@ export class CreatSongComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: res.message,
+        title: 'Tạo thành công !',
         showConfirmButton: false,
         timer: 3000
       });
