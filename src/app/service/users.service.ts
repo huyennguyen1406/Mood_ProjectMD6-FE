@@ -5,6 +5,8 @@ import {Users} from '../model/Users';
 import {environment} from '../../environments/environment';
 import {HttpService} from './http.service';
 import {Password} from '../model/Password';
+import firebase from "firebase";
+import {User} from "../model/User";
 
 
 const httpOptions = {
@@ -25,11 +27,11 @@ export class UsersService {
     return this.http.put(API_URL + '/home/user/changePassword/' + idUser, data, this.httpService.getHttp());
   }
 
-  getUserById(id: string): Observable<Users> {
-    return this.http.get<Users>(API_URL + '/home/user/' + id, this.httpService.getHttp());
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(API_URL + '/home/user/' + id, this.httpService.getHttp());
   }
 
-  updateUser(user: Users): Observable<any> {
-    return this.http.post(API_URL + '/user/changeinfo', user , this.httpService.getHttp());
+  updateUser(idUser: number, user: Users): Observable<any> {
+    return this.http.put(API_URL + `/home/user/${idUser}`, user , this.httpService.getHttp());
   }
 }

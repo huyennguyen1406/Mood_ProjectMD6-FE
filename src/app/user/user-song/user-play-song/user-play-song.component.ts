@@ -7,7 +7,7 @@ import {HttpService} from '../../../service/http.service';
 import {PlaylistService} from '../../../service/playlist.service';
 import {Playlist} from '../../../model/Playlist';
 import {LikeSong} from '../../../model/LikeSong';
-import {LikesongService} from '../../../service/likesong.service';
+import {LikeSongService} from '../../../service/likesong.service';
 import {CommentsongService} from '../../../service/commentsong.service';
 import {CommentSong} from '../../../model/CommentSong';
 import {User} from '../../../model/User';
@@ -36,7 +36,7 @@ export class UserPlaySongComponent implements OnInit {
 
   constructor(private userService: UsersService,
               private songService: SongService,
-              private likeSongService: LikesongService,
+              private likeSongService: LikeSongService,
               private commentSongService: CommentsongService,
               private playlistService: PlaylistService,
               private router: ActivatedRoute,
@@ -52,9 +52,9 @@ export class UserPlaySongComponent implements OnInit {
     this.id = Number(this.router.snapshot.paramMap.get('id'));
 
     // Lấy totalLike - DONE
-    this.likeSongService.getTotalLike(this.id).subscribe(countLike => {
-      this.totalLike = countLike;
-    });
+    // this.likeSongService.getTotalLike(this.id).subscribe(countLike => {
+    //   this.totalLike = countLike;
+    // });
 
     this.playlistService.getPlaylistByUser(this.userId).subscribe(res => {
       this.playlists = res;
@@ -96,9 +96,9 @@ export class UserPlaySongComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   likeSong(idUser: number, idSong: number) {
-    this.likeSongService.updateLikeSong(idUser, idSong).subscribe((countLike) =>{
-      this.totalLike = countLike;
-    })
+    // this.likeSongService.updateLikeSong(idUser, idSong).subscribe((countLike) =>{
+    //   this.totalLike = countLike;
+    // })
   }
 
   // tslint:disable-next-line:typedef
@@ -134,9 +134,9 @@ export class UserPlaySongComponent implements OnInit {
   // tslint:disable-next-line:typedef
   changeSong(data) {
 
-    this.likeSongService.getTotalLike(data).subscribe(countLike => {
-      this.totalLike = countLike;
-    });
+    // this.likeSongService.getTotalLike(data).subscribe(countLike => {
+    //   this.totalLike = countLike;
+    // });
 
     this.songService.getSongById(data).subscribe(res => {
       this.song = res;
