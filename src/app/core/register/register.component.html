@@ -1,4 +1,4 @@
-<app-navbar-menu></app-navbar-menu>
+<app-navbar-login-register></app-navbar-login-register>
 <form class="box" [formGroup]="registerForm" (ngSubmit)="register()">
   <input formControlName="name" type="text" name="" placeholder="Họ tên">
   <div *ngIf="registerForm.get('name').hasError('required') && registerForm.get('name').touched"

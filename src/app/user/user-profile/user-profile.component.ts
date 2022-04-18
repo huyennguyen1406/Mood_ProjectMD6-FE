@@ -68,7 +68,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateUser(user1.id, user1).subscribe(res => {
       Swal.fire({
         icon: 'success',
-        title: res.message,
+        title: 'Cập nhật thành công',
         showConfirmButton: true,
         timer: 3000
       });
